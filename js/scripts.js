@@ -190,7 +190,6 @@ function searchByName() {
 	filter = input.value.toUpperCase();
 	ul = document.getElementById("myUL");
 	li = ul.querySelectorAll(".list-item");
-	console.log(li);
 
 	for (i = 0; i < li.length; i++) {
 		a = li[i].getElementsByTagName("button")[0];
@@ -205,3 +204,9 @@ function searchByName() {
 
 let inputElement = document.querySelector("#myInput");
 inputElement.addEventListener("keyup", searchByName);
+
+let clearSearchButton = document.querySelector("#clear-search");
+clearSearchButton.addEventListener("click", function () {
+	inputElement.value = "";
+	inputElement.dispatchEvent(new KeyboardEvent("keyup"));
+});
