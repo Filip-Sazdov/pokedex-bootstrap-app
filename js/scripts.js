@@ -201,3 +201,6 @@ function searchByName() {
 		}
 	}
 }
+
+let inputElement = document.querySelector("#myInput");
+inputElement.addEventListener("keyup", searchByName);
