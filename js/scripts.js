@@ -1,6 +1,6 @@
 let pokemonRepository = (function () {
 	let pokemonList = [];
-	let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=24";
+	let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
 	function add(pokemon) {
 		if (
@@ -67,6 +67,7 @@ let pokemonRepository = (function () {
 
 			button.addEventListener("click", () => {
 				showDetails(pokemon);
+				console.log(pokemon);
 			});
 		});
 	}
@@ -100,7 +101,7 @@ let pokemonRepository = (function () {
 			.concat(pokemon.name.slice(1));
 		let stringifiedTypes = pokemon.types.join(", and ");
 		let stringifiedAbilities = pokemon.abilities.join(", and ");
-
+		// The API provided an erroneus value for height, value is missing a "." to denote height in meters (example: 11, instead of 1.1) so I corrected it with the below code after checking the true height on pokemon.com which is displayed there in feet.
 		let correctHeight = function () {
 			heightFromApi = pokemon.height.toString();
 
@@ -145,7 +146,7 @@ let pokemonRepository = (function () {
 				return response.json();
 			})
 			.then(function (details) {
-				// Now we add the details to the item
+				// Now we add the API object details to the pokemon item
 				item.imageUrl = details.sprites.other.dream_world.front_default;
 				item.imageUrlAnimation =
 					details.sprites.versions["generation-v"][
