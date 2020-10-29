@@ -1,7 +1,7 @@
 let pokemonRepository = (function () {
 	let pokemonList = [];
-	let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=20";
-	let modalContainer = document.querySelector("#modal-container");
+	let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=24";
+	let modalContainer = document.querySelector(".modal");
 
 	function add(pokemon) {
 		if (
@@ -33,23 +33,40 @@ let pokemonRepository = (function () {
 		}
 	}
 	function addListItem(pokemon) {
-		pokemonRepository.loadDetails(pokemon).then(function () {
+		loadDetails(pokemon).then(function () {
 			let listOfPokemons = document.querySelector(".pokemon-list");
+
 			let listItem = document.createElement("li");
-			listItem.classList.add("list-item");
+			listItem.classList.add(
+				"list-item",
+				"list-group-item-dark",
+				"col-4",
+				"card",
+				"group-list-item",
+				"mb-4"
+			);
+
 			let button = document.createElement("button");
 			button.innerText = pokemon.name;
-			button.classList.add("button-template");
+			button.classList.add(
+				"btn",
+				"btn-primary",
+				"text-capitalize",
+				"text-warning"
+			);
+			button.setAttribute("type", "button");
+			button.setAttribute("data-toggle", "modal");
+			button.setAttribute("data-target", "#exampleModalCenter");
 
-			//I need help with this. I can't access the image at details.sprites.other.dream_world.front_default;
 			let buttonImage = document.createElement("img");
 			buttonImage.setAttribute("src", pokemon.imageUrlAnimation);
-			buttonImage.classList.add("button-image");
-			listItem.appendChild(buttonImage);
+			buttonImage.classList.add("button-image", "card-img-top");
 
+			listItem.appendChild(buttonImage);
 			listItem.appendChild(button);
 			listOfPokemons.appendChild(listItem);
-			button.addEventListener("click", function (event) {
+
+			button.addEventListener("click", () => {
 				showDetails(pokemon);
 			});
 		});
@@ -59,43 +76,49 @@ let pokemonRepository = (function () {
 		loadDetails(pokemon).then(function () {
 			showModal(pokemon);
 		});
-		console.log(pokemon);
 	}
 	function showModal(pokemon) {
-		// Clear all existing modal content
-		modalContainer.innerHTML = "";
+		let contentElement = document.querySelector(".modal-body");
+		let titleElement = document.querySelector(".modal-title");
 
-		let modal = document.createElement("div");
-		modal.classList.add("modal");
+		let modalBox = document.querySelector(".modal-content");
+		modalBox.classList.add("text-warning", "text-center", "bg-dark");
 
-		// Add the new modal content
-		let closeButtonElement = document.createElement("button");
-		closeButtonElement.classList.add("modal-close");
-		closeButtonElement.innerText = "Close";
-		closeButtonElement.addEventListener("click", hideModal);
+		contentElement.innerHTML = "";
+		titleElement.innerHTML = "";
 
-		let titleElement = document.createElement("h1");
-		titleElement.innerText = pokemon.name;
-		titleElement.classList.add("text-transform");
+		let nameElement = document.createElement("h1");
+		nameElement.innerText = pokemon.name;
+		nameElement.classList.add("text-capitalize");
 
 		let spriteElement = document.createElement("img");
-		spriteElement.classList.add("modal-img");
 		spriteElement.src = pokemon.imageUrl;
+		spriteElement.classList.add("modal-img");
+		spriteElement.setAttribute("style", "width:50%");
 
-		let capitalisedName = pokemon.name[0].toUpperCase().concat(name.slice(1));
+		let capitalisedName = pokemon.name[0]
+			.toUpperCase()
+			.concat(pokemon.name.slice(1));
 		let stringifiedTypes = pokemon.types.join(", and ");
 		let stringifiedAbilities = pokemon.abilities.join(", and ");
 
-		let contentElement = document.createElement("p");
-		contentElement.innerText = `${capitalisedName} is a Pokemon of type[s]: ${stringifiedTypes} and has a height of ${pokemon.height} feet. Its abilities are: ${stringifiedAbilities}.`;
+		let correctHeight = function () {
+			heightFromApi = pokemon.height.toString();
 
-		modal.appendChild(closeButtonElement);
-		modal.appendChild(titleElement);
-		modal.appendChild(spriteElement);
-		modal.appendChild(contentElement);
-		modalContainer.appendChild(modal);
+			if (heightFromApi.length < 2) {
+				heightFromApi = "0." + heightFromApi;
+				return heightFromApi;
+			} else {
+				heightFromApi = heightFromApi[0] + "." + heightFromApi[1];
+			}
+			return heightFromApi;
+		};
+		let paragraph = document.createElement("p");
+		paragraph.innerText = `${capitalisedName} is a Pokemon of type[s]: ${stringifiedTypes} and has a height of ${correctHeight()} meters. Its abilities are: ${stringifiedAbilities}.`;
 
-		modalContainer.classList.add("is-visible");
+		titleElement.appendChild(nameElement);
+		contentElement.appendChild(spriteElement);
+		contentElement.appendChild(paragraph);
 	}
 
 	function hideModal() {
@@ -109,8 +132,6 @@ let pokemonRepository = (function () {
 	});
 
 	modalContainer.addEventListener("click", (e) => {
-		// Since this is also triggered when clicking INSIDE the modal container,
-		// We only want to close if the user clicks directly on the overlay
 		let target = e.target;
 		if (target === modalContainer) {
 			hideModal();
@@ -180,12 +201,12 @@ pokemonRepository.loadList().then(function () {
 	});
 });
 
-function myFunction() {
+function searchByName() {
 	let input, filter, ul, li, a, txtValue;
 	input = document.getElementById("myInput");
 	filter = input.value.toUpperCase();
 	ul = document.getElementById("myUL");
-	li = ul.querySelectorAll(".list");
+	li = ul.querySelectorAll(".list-item");
 	console.log(li);
 
 	for (i = 0; i < li.length; i++) {

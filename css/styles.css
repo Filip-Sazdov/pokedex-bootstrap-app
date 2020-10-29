@@ -1,0 +1,16 @@
+.pokemon-list {
+    max-width: 100%;
+}
+
+.list-item {
+    border: 1px solid red;
+    list-style-type: none;
+}
+
+.button-image {
+    height: 200px;
+}
+
+.modal-content {
+    border: 5px solid red;
+}
