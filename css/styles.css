@@ -1,14 +1,19 @@
 .pokemon-list {
-    max-width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
 }
 
-.list-item {
-    border: 1px solid red;
-    list-style-type: none;
-}
-
-.button-image {
+.card-image {
     height: 200px;
+    padding: 20px;
+}
+
+.modal {
+    border: 5px solid red;
+}
+
+.modal-img {
+    width: 50%
 }
 
 .modal-content {
@@ -17,4 +22,16 @@
 
 .card {
     background-color: #eae6dd;
+    border: 1px solid red;
+    width: 18rem;
+    margin: 13px;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.btn {
+    background-color: #d88780;
+    color: white;
 }
