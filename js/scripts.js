@@ -12,7 +12,6 @@ let pokemonRepository = (function () {
 		) {
 			pokemonList.push(pokemon);
 		} else {
-			console.log('Please input an Object data type with the required properties!!!');
 		}
 	}
 
@@ -45,8 +44,8 @@ let pokemonRepository = (function () {
 			button.innerText = pokemon.name;
 			button.classList.add('btn', 'btn-primary', 'btn-lg', 'text-capitalize');
 			button.setAttribute('type', 'button');
-			button.setAttribute('data-toggle', 'modal');
-			button.setAttribute('data-target', '#exampleModalCenter');
+			// button.setAttribute('data-toggle', 'modal');
+			// button.setAttribute('data-target', '#ModalCenter');
 
 			body.appendChild(button);
 			card.appendChild(image);
@@ -68,14 +67,14 @@ let pokemonRepository = (function () {
 		let modal = document.createElement('div');
 		modal.innerHTML = '';
 		modal.classList.add('modal', 'fade');
-		modal.setAttribute('id', 'exampleModalCenter');
+		modal.setAttribute('id', 'ModalCenter');
 		modal.setAttribute('tabindex', '-1');
 		modal.setAttribute('role', 'dialog');
 		modal.setAttribute('aria-labelledby', 'exampleModalCenterTitle');
 		modal.setAttribute('aria-hidden', 'true');
 
 		let modalDialog = document.createElement('div');
-		modalDialog.classList.add('modal-dialog', 'modal-dialog-centered');
+		modalDialog.classList.add('modal-dialog', 'modal-dialog-centered', 'modal-dialog-scrollable');
 		modalDialog.setAttribute('role', 'document');
 
 		let modalContent = document.createElement('div');
@@ -93,7 +92,6 @@ let pokemonRepository = (function () {
 		button.classList.add('close');
 		button.setAttribute('data-dismiss', 'modal');
 		button.setAttribute('aria-label', 'Close');
-		button.setAttribute('data-dismiss', 'modal');
 		button.innerHTML = '<span aria-hidden="true">&times;</span>';
 
 		let modalBody = document.createElement('div');
@@ -117,6 +115,7 @@ let pokemonRepository = (function () {
 			}
 			return heightFromApi;
 		};
+
 		let paragraph = document.createElement('p');
 		paragraph.innerText = `${capitalisedName} is a Pokemon of type[s]: ${stringifiedTypes} and has a height of ${correctHeight()} meters. Its abilities are: ${stringifiedAbilities}.`;
 
@@ -129,6 +128,8 @@ let pokemonRepository = (function () {
 		modalDialog.appendChild(modalContent);
 		modal.appendChild(modalDialog);
 		document.querySelector('main').appendChild(modal);
+
+		$('#ModalCenter').modal('show');
 	}
 
 	function loadList() {
