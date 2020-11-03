@@ -1,6 +1,6 @@
 let pokemonRepository = (function () {
 	let pokemonList = [];
-	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=20';
 
 	function add(pokemon) {
 		if (
@@ -66,6 +66,7 @@ let pokemonRepository = (function () {
 	}
 	function showModal(pokemon) {
 		let modal = document.createElement('div');
+		modal.innerHTML = '';
 		modal.classList.add('modal', 'fade');
 		modal.setAttribute('id', 'exampleModalCenter');
 		modal.setAttribute('tabindex', '-1');
@@ -197,7 +198,7 @@ function searchByName() {
 	ul = document.getElementById('myUL');
 	li = ul.querySelectorAll('.card');
 	for (i = 0; i < li.length; i++) {
-		a = li[i].querySelector('.card-body').querySelector('.card-title');
+		a = li[i].querySelector('.card-body').querySelector('.btn');
 		txtValue = a.textContent || a.innerText;
 		if (txtValue.toUpperCase().indexOf(filter) > -1) {
 			li[i].style.display = '';
