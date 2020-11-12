@@ -13,9 +13,10 @@
   </head>
 
   <body class="bg-secondary text-warning">
-    <header class="w-75 mx-auto border rounded mt-5">
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <a class="navbar-brand btn bg-secondary text-warning nav-item nav-link"
+    <header class="w-75 mx-auto rounded">
+      <nav class="navbar navbar-expand-md navbar-light bg-dark">
+        <a class="navbar-brand btn bg-secondary border border-warning
+          text-warning nav-item nav-link"
           href="https://filip-sazdov.github.io/portfolio/">Filip's Portfolio</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
@@ -25,12 +26,13 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ml-auto">
             <form class="form-inline">
-              <input class="form-control text-warning mr-md-2 mt-1 nav-item
+              <input class="form-control text-warning mr-2 mt-1 nav-item
                 nav-link" id="myInput"
                 placeholder="Search for Pokemon" title="Type in a name"
                 aria-label="Search">
               <button type="button" class="mr-auto text-warning my-1 btn
-                btn-secondary nav-item nav-link" id="clear-search">Clear
+                btn-secondary nav-item nav-link border border-warning"
+                id="clear-search">Clear
                 Search</button>
             </form>
           </div>
@@ -39,12 +41,18 @@
     </header>
 
     <h1 class="text-center mt-5">Pokédex</h1>
-    <p class="text-center w-50 mb-5 mx-auto">The purpose of this website is to
-      demonstrate my proficiency with vanilla JavaScript and Bootstrap. The
+    <h3 class="text-center mb-5">Vanilla JavaScript & Bootstrap 4 version</h3>
+    <p class="text-center w-50 mb-2 mx-auto">The purpose of this website is to
+      demonstrate my proficiency with Vanilla JavaScript and Bootstrap.</p>
+    <p class="text-center w-50 mb-2 mx-auto">The
       original version of this Pokédex was created exclusively using HTML, CSS,
       and vanilla JavaScript and exists <a class="font-weight-bold text-warning"
         href="https://filip-sazdov.github.io/pokedex-js-app/">here</a></p>
-
+    <p class="text-center w-50 mb-5 mx-auto">
+      Another version built using jQuery and Bootstrap 4
+      exists <a class="font-weight-bold
+        text-warning"
+        href="https://filip-sazdov.github.io/pokedex-jquery-bootstrap-app/">here</a>.</p>
     <main class="container-fluid w-75">
 
       <div id="pokemon-grid" class="card-deck mx-auto justify-content-center
